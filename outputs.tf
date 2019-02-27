@@ -1,33 +1,15 @@
-output "group_id" {
-  value = "${module.group.group_id}"
+output "group_ids" {
+  	value 						= ["${flatten(alicloud_dns_group.this.*.id)}"]
 }
 
-output "group_name" {
-  value = "${module.group.group_name}"
+output "group_names" {
+  	value 						= ["${flatten(alicloud_dns_group.this.*.name)}"]
 }
 
-output "domain_id" {
-  value = "${module.domain.id}"
+output "domain_names" {
+	value 						= ["${flatten(alicloud_dns.this.*.name)}"]
 }
 
-output "domain_name" {
-	value = "${module.domain.name}"
+output "record_info" {
+	value 						= "${formatlist("%v   %64v : %10v   %5v   %v", alicloud_dns_record.this.*.id, alicloud_dns_record.this.*.host_record, alicloud_dns_record.this.*.type,alicloud_dns_record.this.*.ttl, alicloud_dns_record.this.*.value)}"
 }
-
-output "record_cname" {
-	value = "${module.record.record_cname}"
-}
-
-output "record_a" {
-	value = "${module.record.record_a}"
-}
-
-output "record_aaaa" {
-	value = "${module.record.record_aaaa}"
-}
-
-output "record_mx" {
-	value = "${module.record.record_mx}"
-}
-
-

@@ -1,49 +1,30 @@
-variable "count" {
-  default 	= "1"
+variable "group_list" {
+    description           = "DNS domain Group list"
+    type                  = "list"
 }
 
-variable "domain_names" {
-	type 	= "list"
-	default = ["bibibi.com"]
+variable "group_count" {
+    description           = "DNS domain group list length"
 }
 
-variable "record_name" {
-  type    	= "map"
-  default 	= {
-    "a" 	= "rr_a"
-    "cname" = "rr_cname"
-    "aaaa" 	= "rr_aaaa"
-    "mx"	= "rr_mx"
-  }
+variable "domain_list" {
+    description           = "DNS domain name list"
+    type                  = "list"
 }
 
-variable "record_ttl" {
-  type    	= "string"
-  default 	= "700"
+variable "group_name" {
+    description           = "DNS domain`s parrent group name"
 }
 
-variable "record_type" {
-  type    	= "map"
-  default 	= {
-    "a" 	= "A"
-    "cname" = "CNAME"
-    "aaaa" 	= "AAAA"
-    "mx"	= "MX"
-  }
+variable "domain_count" {
+    description           = "Dns domain name list length" 
 }
 
-variable "a_value" {
-  default = {
-    "0" = "223.5.5.5"
-    "1" = "223.6.6.6"
-  }
+variable "record_list" {
+    description           = "Dns record list"
+    type                  = "list"
 }
 
-variable "a_count" {
-	default = "2"
-}
-
-variable "mx_priority" {
-  type    	= "string"
-  default 	= "7"
+variable "record_count" {
+    description           = "Dns record list length"
 }

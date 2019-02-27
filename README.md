@@ -1,4 +1,5 @@
 Alicloud Domain Name System (DNS) Terraform Module
+terraform-alicloud-dns
 =============================================
 
 Terraform module which creates DNS resources on Alibaba Cloud.
@@ -27,20 +28,43 @@ You can use this in your terraform template with the following steps.
 
 
         module "record" {
-            source      = "./modules/record"
-              ttl         = "${var.record_ttl}"
-              type        = "${var.record_type}"
-              name        = "${var.record_name}"
-              a_value     = "${var.a_value}"
-              a_count     = "${var.a_count}"
-              mx_priority = "${var.mx_priority}"
-              domain_id   = "${module.domain.id}"
+          source      = "terraform-alicloud-modules/dns/alicloud"
+          ttl         = "${var.record_ttl}"
+          type        = "${var.record_type}"
+          name        = "${var.record_name}"
+          a_value     = "${var.a_value}"
+          a_count     = "${var.a_count}"
+          mx_priority = "${var.mx_priority}"
+          domain_id   = "${module.domain.id}"
         }
 
 2. Setting values for the following variables through environment variables:
 
     - ALICLOUD_ACCESS_KEY
     - ALICLOUD_SECRET_KEY
+    - ALICLOUD_REGION
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|:----:|:-----:|:-----:|
+| group_list    | group list what you want to create    | list   | -  | no |
+| group_count   | group list length                     | string | -  | no |
+| domain_list   | domain list what you want to create   | list   | -  | no |
+| group_name    | group name for 'domain_list'          | string | -  | no |
+| domain_count  | domain list length                    | list   | -  | no |
+| record_list   | record list                           | list   | -  | no |
+| record_count  | record list length                    | string | -  | no |
+
+
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| group_ids   | the id list of group  |
+| group_names | group name list       |
+| domain_names| domain name list      |
+| record_info | record info list      |
 
 
 Authors
