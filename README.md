@@ -27,15 +27,37 @@ You can use this in your terraform template with the following steps.
 1. Adding a module resource to your template, e.g. main.tf
 
 
-        module "record" {
-          source      = "terraform-alicloud-modules/dns/alicloud"
-          ttl         = "${var.record_ttl}"
-          type        = "${var.record_type}"
-          name        = "${var.record_name}"
-          a_value     = "${var.a_value}"
-          a_count     = "${var.a_count}"
-          mx_priority = "${var.mx_priority}"
-          domain_id   = "${module.domain.id}"
+        module "group" {
+            source                      = "terraform-alicloud-modules/dns/alicloud"
+            group_list                  = ["DefaultGroup","AlibabaTest001"]
+            group_count                 = "2"
+            domain_list                 = ["bibibi.com","bibibibibibi.com"]
+            domain_count                = 2
+            group_name                  = "DefaultGroup"
+            record_list                 = [
+                {
+                    domain_name         = "bibibi.com"
+                    name                = "www"
+                    type                = "A"
+                    ttl                 = 600
+                    value               = "223.5.5.5"
+                },
+                {
+                    domain_name         = "bibibibibibi.com"
+                    name                = "www"
+                    type                = "A"
+                    ttl                 = 600
+                    value               = "223.5.5.5"
+                },
+                {
+                    domain_name         = "bibibibibibi.com"
+                    name                = "www"
+                    type                = "A"
+                    ttl                 = 600
+                    value               = "223.6.6.6"
+                }
+            ]
+            record_count                = 3
         }
 
 2. Setting values for the following variables through environment variables:
