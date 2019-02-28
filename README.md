@@ -36,12 +36,14 @@ You can use this in your terraform template with the following steps.
                     type                = "A"
                     ttl                 = 600
                     value               = "223.5.5.5"
+                    priority            = 1
                 },
                 {
                     name                = "www"
                     type                = "A"
                     ttl                 = 600
                     value               = "223.5.5.5"
+                    priority            = 1
                 }
             ]
             record_count                = 2
