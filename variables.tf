@@ -1,23 +1,15 @@
-variable "group_list" {
-    description           = "DNS domain Group list"
-    type                  = "list"
-}
-
-variable "group_count" {
-    description           = "DNS domain group list length"
-}
-
-variable "domain_list" {
-    description           = "DNS domain name list"
-    type                  = "list"
+variable "domain_name" {
+    description           = "DNS domain name"
 }
 
 variable "group_name" {
     description           = "DNS domain`s parrent group name"
+    default               = ""
 }
 
-variable "domain_count" {
-    description           = "Dns domain name list length" 
+variable "ds_group_name" {
+    description           = "Dns domain`s parrent group name for data source"
+    default               = ""
 }
 
 variable "record_list" {

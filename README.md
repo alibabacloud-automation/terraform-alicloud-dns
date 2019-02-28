@@ -29,35 +29,22 @@ You can use this in your terraform template with the following steps.
 
         module "group" {
             source                      = "terraform-alicloud-modules/dns/alicloud"
-            group_list                  = ["DefaultGroup","AlibabaTest001"]
-            group_count                 = "2"
-            domain_list                 = ["bibibi.com","bibibibibibi.com"]
-            domain_count                = 2
-            group_name                  = "DefaultGroup"
+            domain_name                 = "aliyun.com"
             record_list                 = [
                 {
-                    domain_name         = "bibibi.com"
                     name                = "www"
                     type                = "A"
                     ttl                 = 600
                     value               = "223.5.5.5"
                 },
                 {
-                    domain_name         = "bibibibibibi.com"
                     name                = "www"
                     type                = "A"
                     ttl                 = 600
                     value               = "223.5.5.5"
-                },
-                {
-                    domain_name         = "bibibibibibi.com"
-                    name                = "www"
-                    type                = "A"
-                    ttl                 = 600
-                    value               = "223.6.6.6"
                 }
             ]
-            record_count                = 3
+            record_count                = 2
         }
 
 2. Setting values for the following variables through environment variables:
@@ -70,23 +57,20 @@ You can use this in your terraform template with the following steps.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| group_list    | group list what you want to create    | list   | -  | no |
-| group_count   | group list length                     | string | -  | no |
-| domain_list   | domain list what you want to create   | list   | -  | no |
-| group_name    | group name for 'domain_list'          | string | -  | no |
-| domain_count  | domain list length                    | list   | -  | no |
-| record_list   | record list                           | list   | -  | no |
-| record_count  | record list length                    | string | -  | no |
+| domain_name   | domain name which you want to add                                   | list   | -  | yes |
+| group_name    | group name which you want to add and set 'domain'`s group to it     | string | -  | no  |
+| ds_group_name | data source group name ,if you want use extend group ,set this key  | list   | -  | no  |
+| record_list   | record list                                                         | list   | -  | no  |
+| record_count  | record list length                                                  | string | -  | no  |
 
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| group_ids   | the id list of group  |
-| group_names | group name list       |
-| domain_names| domain name list      |
-| record_info | record info list      |
+| group_id    | the id of group       |
+| domain_name | domain name           |
+| records     | record info list      |
 
 
 Authors
