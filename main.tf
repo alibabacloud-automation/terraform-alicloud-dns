@@ -19,5 +19,4 @@ module "records" {
 
 data "alicloud_dns_groups" "customer" {
   name_regex                                = "${var.group_name == "" ? var.ds_group_name : var.group_name}"
-  "output_file"                             = "group.json"
 }
