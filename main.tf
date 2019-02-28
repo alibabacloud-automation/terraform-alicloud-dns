@@ -1,21 +1,24 @@
-resource "alicloud_dns_group" "this" {
-    name                                   = "${element(var.group_list, count.index)}"
-    count                                  = "${var.group_count}"
+module "group" {
+    source                                  = "./modules/group"
+    group_list                              = ["${var.group_name}"]
+    group_count                             = "${var.group_name == "" ? 0 : 1}"
 }
 
-resource "alicloud_dns" "this" {
-    depends_on                             = ["alicloud_dns_group.this"]
-    name                                   = "${element(var.domain_list, count.index)}"
-    count                                  = "${var.domain_count}"
-    group_id                               = "${data.alicloud_dns_groups.customer.groups.0.group_id}"
+module "domain" {
+    source                                  = "./modules/domain"
+    domain_list                             = ["${var.domain_name}"]
+    domain_count                            = "${var.domain_name == "" ? 0 : 1 }"
+    group_id                                = "${var.group_name == "" && var.ds_group_name == "" ? "" : data.alicloud_dns_groups.customer.groups.0.group_id}"
 }
 
-resource "alicloud_dns_record" "this" {
-    depends_on                             = ["alicloud_dns.this"]
-    name                                   = "${lookup(var.record_list[count.index], "domain_name")}"
-    host_record                            = "${lookup(var.record_list[count.index], "name")}"
-    type                                   = "${lookup(var.record_list[count.index], "type")}"
-    ttl                                    = "${lookup(var.record_list[count.index], "ttl")}"
-    value                                  = "${lookup(var.record_list[count.index], "value")}"
-    count                                  = "${var.record_count}"
+module "records" {
+    source                                  = "./modules/record"
+    domain_name                             = "${var.domain_name}"
+    record_list                             = "${var.record_list}"
+    record_count                            = "${var.record_count}"
+}
+
+data "alicloud_dns_groups" "customer" {
+  name_regex                                = "${var.group_name == "" ? var.ds_group_name : var.group_name}"
+  "output_file"                             = "group.json"
 }
