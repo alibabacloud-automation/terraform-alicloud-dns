@@ -17,6 +17,6 @@ Creates DNS Domain. Accept list, all this domain need not belong to other user, 
 
 | Name | Description |
 |------|-------------|
-| name | domain name |
+| this_name | domain name |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

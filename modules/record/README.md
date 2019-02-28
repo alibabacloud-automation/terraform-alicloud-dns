@@ -16,6 +16,6 @@ Creates DNS Domain. Accept list.
 
 | Name | Description |
 |------|-------------|
-| records | Record information list |
+| this_records | Record information list |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

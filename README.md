@@ -70,9 +70,9 @@ You can use this in your terraform template with the following steps.
 
 | Name | Description |
 |------|-------------|
-| group_id    | the id of group       |
-| domain_name | domain name           |
-| records     | record info list      |
+| this_group_id    | the id of group       |
+| this_domain_name | domain name           |
+| this_records     | record info list      |
 
 
 Authors
