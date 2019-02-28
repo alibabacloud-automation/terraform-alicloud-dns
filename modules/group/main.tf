@@ -1,4 +1,4 @@
 resource "alicloud_dns_group" "this" {
   	name        						= "${element(var.group_list, count.index)}"
-  	count       						= "${var.group_count}"
+  	count       						= "${length(var.group_list) > var.group_count ? var.group_count : length(var.group_list)}"
 }

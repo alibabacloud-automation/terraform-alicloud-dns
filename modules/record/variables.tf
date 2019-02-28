@@ -3,10 +3,6 @@ variable "record_list" {
     type                        = "list"
 }
 
-variable "record_count" {
-    description                 = "Dns record list length"
-}
-
 variable "domain_name" {
     description                 = "Dns record parrent domain name"
 }

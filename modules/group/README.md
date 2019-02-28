@@ -9,7 +9,6 @@ Creates DNS Domain group. Accept list, group can not repeat.
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
 | group_list | Group name list | list | - | yes |
-| group_count | Group name list length | string | - | yes |
 
 
 ## Outputs
