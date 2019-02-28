@@ -1,6 +1,6 @@
 # record
 
-Creates DNS Domain. Accept list, all this domain need not belong to other user, and it must realy has been registered.
+Creates DNS Domain. Accept list.
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
