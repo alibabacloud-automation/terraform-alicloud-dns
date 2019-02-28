@@ -4,5 +4,6 @@ resource "alicloud_dns_record" "this" {
     type                    = "${lookup(var.record_list[count.index], "type")}"
     ttl                     = "${lookup(var.record_list[count.index], "ttl")}"
     value                   = "${lookup(var.record_list[count.index], "value")}"
-    count                   = "${var.record_count}"
+    priority                = "${lookup(var.record_list[count.index], "priority")}"
+    count                   = "${length(var.record_list)}"
 }

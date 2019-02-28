@@ -16,7 +16,3 @@ variable "record_list" {
     description           = "Dns record list"
     type                  = "list"
 }
-
-variable "record_count" {
-    description           = "Dns record list length"
-}
