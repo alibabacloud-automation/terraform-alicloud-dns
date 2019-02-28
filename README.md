@@ -12,9 +12,9 @@ These types of resources are supported:
 
 Root module calls these modules which can also be used separately to create independent resources:
 
-* [dns_group](https://github.com/terraform-alicloud-modules/terraform-alicloud-dns/tree/master/modules/group) - creates groups
-* [dns_domain](https://github.com/terraform-alicloud-modules/terraform-alicloud-dns/tree/master/modules/domain) - creates domains
-* [dns_record](https://github.com/terraform-alicloud-modules/terraform-alicloud-dns/tree/master/modules/record) - creates records
+* [group](https://github.com/terraform-alicloud-modules/terraform-alicloud-dns/tree/master/modules/group) - creates groups
+* [domain](https://github.com/terraform-alicloud-modules/terraform-alicloud-dns/tree/master/modules/domain) - creates domains
+* [record](https://github.com/terraform-alicloud-modules/terraform-alicloud-dns/tree/master/modules/record) - creates records
 
 
 `NOTE`:
@@ -27,7 +27,7 @@ You can use this in your terraform template with the following steps.
 1. Adding a module resource to your template, e.g. main.tf
 
 
-        module "group" {
+        module "dns" {
             source                      = "terraform-alicloud-modules/dns/alicloud"
             domain_name                 = "aliyun.com"
             record_list                 = [
