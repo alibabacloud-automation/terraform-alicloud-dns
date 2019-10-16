@@ -10,3 +10,6 @@ output "this_records" {
   value = module.records.this_records
 }
 
+output "this_group_name" {
+  value = module.group.this_group_name
+}
