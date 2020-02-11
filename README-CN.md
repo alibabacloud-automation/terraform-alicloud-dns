@@ -1,26 +1,23 @@
-Terraform module which create DNS on Alibaba Cloud.  
 terraform-alicloud-dns
--------------------------------
+======================
 
-English | [简体中文](https://github.com/terraform-alicloud-modules/terraform-alicloud-dns/blob/master/README-CN.md)
+Terraform模块用于在阿里云上创建 [DNS](https://help.aliyun.com/product/29697.html)，同时您可以为其添加 records。
 
-Terraform module which creates [DNS](https://help.aliyun.com/product/29697.html) resources on Alibaba Cloud and add records.
-
-These types of resources are supported:
+支持以下类型的资源：
 
 * [DNS](https://www.terraform.io/docs/providers/alicloud/r/dns.html)
 * [DNS Group](https://www.terraform.io/docs/providers/alicloud/r/dns_group.html)
-* [DNS Record](https://www.terraform.io/docs/providers/alicloud/r/dns_record.html)
+* [DNS Records](https://www.terraform.io/docs/providers/alicloud/r/dns_record.html)
 
-## Terraform versions
+## Terraform 版本
 
-The Module requires Terraform 0.12 and Terraform Provider AliCloud 1.56.0+.
+本 Module 要求使用 Terraform 0.12 和 阿里云 Provider 1.56.0+。
 
-## Usage
+## 用法
 
-### Create a DNS.
+### 创建一个新的 DNS
 
-Create a DNS without any record.
+创建一个未添加解析记录的 DNS。
 
 ```hcl
 module "dns" {
@@ -29,7 +26,7 @@ module "dns" {
 }
 ``` 
 
-Create a DNS and add the new group.
+创建一个未添加解析记录的 DNS 并添加到新创建的 DNS 组中。
 
 ```hcl
 module "dns" {
@@ -40,7 +37,7 @@ module "dns" {
 }
 ``` 
 
-Create a DNS and add records.
+创建一个 DNS 并添加解析记录。
 
 ```hcl
 module "dns" {
@@ -73,9 +70,9 @@ module "dns" {
 }
 ``` 
 
-### Operation of existing DNS.
+### 操作已存在的DNS
 
-Add records to existing domain.
+对已存在的域名中添加解析记录。
 
 ```hcl
 module "dns" {
@@ -108,20 +105,19 @@ module "dns" {
 }
 ``` 
 
-## Examples
+## 示例
 
-* [complete example](https://github.com/terraform-alicloud-modules/terraform-alicloud-dns/tree/master/examples/complete)
+* [DNS 完整示例](https://github.com/terraform-alicloud-modules/terraform-alicloud-dns/tree/master/examples/complete)
 
-
-Authors
+作者
 -------
-Created and maintained by Zhou qilin(z17810666992@163.com), He Guimin(@xiaozhu36, heguimin36@163.com).
+Created and maintained by Zhou qilin(z17810666992@163.com), He Guimin(@xiaozhu36, heguimin36@163.com)
 
-License
+许可
 ----
 Apache 2 Licensed. See LICENSE for full details.
 
-Reference
+参考
 ---------
 * [Terraform-Provider-Alicloud Github](https://github.com/terraform-providers/terraform-provider-alicloud)
 * [Terraform-Provider-Alicloud Release](https://releases.hashicorp.com/terraform-provider-alicloud/)

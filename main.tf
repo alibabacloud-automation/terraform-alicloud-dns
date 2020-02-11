@@ -1,29 +1,64 @@
 provider "alicloud" {
-  version              = ">=1.56.0"
-  region               = var.region != "" ? var.region : null
-  configuration_source = "terraform-alicloud-modules/dns"
+  profile                 = var.profile != "" ? var.profile : null
+  shared_credentials_file = var.shared_credentials_file != "" ? var.shared_credentials_file : null
+  region                  = var.region != "" ? var.region : null
+  skip_region_validation  = var.skip_region_validation
+  configuration_source    = "terraform-alicloud-modules/dns"
 }
 
-module "group" {
-  source      = "./modules/group"
-  group_list  = [var.group_name]
-  group_count = var.group_name == "" ? 0 : 1
+data "alicloud_dns_groups" "this" {
+  name_regex = var.existing_group_name
 }
 
-module "domain" {
-  source       = "./modules/domain"
-  domain_list  = [var.domain_name]
-  domain_count = var.domain_name == "" ? 0 : 1
-  group_id     = var.group_name == "" ? data.alicloud_dns_groups.customer.ids[0] : module.group.this_group_id[0]
+resource "random_uuid" "this" {}
+
+locals {
+  create_group = var.existing_group_name != "" ? false : var.create_group
+  group_name   = var.group_name != "" ? var.group_name : substr("terraform-dns-group-${replace(random_uuid.this.result, "-", "")}", 0, 32)
+
+  create      = var.existing_domian_name != "" ? false : var.create
+  domain_name = var.existing_domian_name != "" ? var.existing_domian_name : var.domain_name
+  group_id    = var.existing_group_name != "" ? data.alicloud_dns_groups.this.ids[0] : concat(alicloud_dns_group.this.*.id, [""])[0]
+
+  existing_domain = var.existing_domian_name != "" || var.create ? true : false
+  this_dns_name   = var.existing_domian_name != "" ? var.existing_domian_name : concat(alicloud_dns.this.*.name, [""])[0]
+  records         = length(var.records) > 0 ? var.records : var.record_list
 }
 
-module "records" {
-  source      = "./modules/record"
-  domain_name = module.domain.this_name[0]
-  record_list = var.record_list
+################################
+# dns_group
+################################
+resource "alicloud_dns_group" "this" {
+  count = local.create_group ? 1 : 0
+  name  = local.group_name
 }
 
-data "alicloud_dns_groups" "customer" {
-  name_regex = var.group_name == "" ? var.ds_group_name : var.group_name
+################################
+# dns
+################################
+resource "alicloud_dns" "this" {
+  count = local.create ? 1 : 0
+
+  name              = var.domain_name
+  group_id          = local.group_id
+  resource_group_id = var.resource_group_id != "" ? var.resource_group_id : null
 }
+
+################################
+# dns_records
+################################
+resource "alicloud_dns_record" "this" {
+  count = local.existing_domain && var.add_records ? length(local.records) : 0
+
+  name        = local.this_dns_name
+  host_record = lookup(local.records[count.index], "rr", "") != "" ? lookup(local.records[count.index], "rr") : lookup(local.records[count.index], "name")
+  type        = lookup(local.records[count.index], "type", "A")
+  ttl         = lookup(local.records[count.index], "ttl", 600)
+  value       = lookup(local.records[count.index], "value")
+  priority    = lookup(local.records[count.index], "priority")
+  routing     = lookup(local.records[count.index], "line", "default")
+}
+
+
+
 
