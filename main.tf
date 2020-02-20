@@ -16,12 +16,12 @@ locals {
   create_group = var.existing_group_name != "" ? false : var.create_group
   group_name   = var.group_name != "" ? var.group_name : substr("terraform-dns-group-${replace(random_uuid.this.result, "-", "")}", 0, 32)
 
-  create      = var.existing_domian_name != "" ? false : var.create
-  domain_name = var.existing_domian_name != "" ? var.existing_domian_name : var.domain_name
+  create      = var.existing_domain_name != "" ? false : var.create
+  domain_name = var.existing_domain_name != "" ? var.existing_domain_name : var.domain_name
   group_id    = var.existing_group_name != "" ? data.alicloud_dns_groups.this.ids[0] : concat(alicloud_dns_group.this.*.id, [""])[0]
 
-  existing_domain = var.existing_domian_name != "" || var.create ? true : false
-  this_dns_name   = var.existing_domian_name != "" ? var.existing_domian_name : concat(alicloud_dns.this.*.name, [""])[0]
+  existing_domain = var.existing_domain_name != "" || var.create ? true : false
+  this_dns_name   = var.existing_domain_name != "" ? var.existing_domain_name : concat(alicloud_dns.this.*.name, [""])[0]
   records         = length(var.records) > 0 ? var.records : var.record_list
 }
 

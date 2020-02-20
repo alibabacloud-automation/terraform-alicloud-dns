@@ -112,6 +112,16 @@ module "dns" {
 
 * [complete example](https://github.com/terraform-alicloud-modules/terraform-alicloud-dns/tree/master/examples/complete)
 
+## Notes
+
+* This module using AccessKey and SecretKey are from `profile` and `shared_credentials_file`.
+If you have not set them yet, please install [aliyun-cli](https://github.com/aliyun/aliyun-cli#installation) and configure it.
+
+Submit Issues
+-------------
+If you have any problems when using this module, please opening a [provider issue](https://github.com/terraform-providers/terraform-provider-alicloud/issues/new) and let us know.
+
+**Note:** There does not recommend to open an issue on this repo.
 
 Authors
 -------

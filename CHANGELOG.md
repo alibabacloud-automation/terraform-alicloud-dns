@@ -1,4 +1,9 @@
 ## 1.4.0 (Unreleased)
+
+IMPROVEMENTS:
+
+- improve(dns): Amend `existing_domian_name` to `existing_domain_name` [GH-5]( https://github.com/terraform-alicloud-modules/terraform-alicloud-dns/pull/5)
+
 ## 1.3.0 (February 11, 2020)
 
 IMPROVEMENTS:

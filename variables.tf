@@ -30,7 +30,7 @@ variable "create" {
   default     = true
 }
 
-variable "existing_domian_name" {
+variable "existing_domain_name" {
   description = "The name of an existing domain. If set, 'create' will be ignored."
   type        = string
   default     = ""
