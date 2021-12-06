@@ -1,4 +1,10 @@
-## 1.5.0 (Unreleased)
+## 1.6.0 (Unreleased)
+## 1.5.0 (December 6, 2021)
+
+ENHANCEMENTS:
+
+- Removes the provider setting and improves the Readme [GH-7](https://github.com/terraform-alicloud-modules/terraform-alicloud-dns/pull/7)
+
 ## 1.4.0 (February 20, 2020)
 
 IMPROVEMENTS:
