@@ -29,8 +29,7 @@ resource "alicloud_dns_group" "this" {
 # dns
 ################################
 resource "alicloud_dns" "this" {
-  count = local.create ? 1 : 0
-
+  count             = local.create ? 1 : 0
   name              = var.domain_name
   group_id          = local.group_id
   resource_group_id = var.resource_group_id != "" ? var.resource_group_id : null
@@ -50,7 +49,3 @@ resource "alicloud_dns_record" "this" {
   priority    = lookup(local.records[count.index], "priority")
   routing     = lookup(local.records[count.index], "line", "default")
 }
-
-
-
-

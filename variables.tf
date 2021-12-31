@@ -49,7 +49,7 @@ variable "existing_group_name" {
 }
 
 variable "resource_group_id" {
-  description = "The Id of resource group which the NDS belongs."
+  description = "The Id of resource group which the DNS belongs."
   type        = string
   default     = ""
 }
@@ -73,7 +73,7 @@ variable "add_records" {
 # dns_group
 ################################
 variable "create_group" {
-  description = "Whether to create a NDS group. Default to false."
+  description = "Whether to create a DNS group. Default to false."
   type        = bool
   default     = false
 }
