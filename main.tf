@@ -10,7 +10,7 @@ locals {
 
   create      = var.existing_domain_name != "" ? false : var.create
   domain_name = var.existing_domain_name != "" ? var.existing_domain_name : var.domain_name
-  group_id    = var.existing_group_name != "" ? data.alicloud_dns_groups.this.ids[0] : concat(alicloud_dns_group.this.*.id, [""])[0]
+  group_id    = local.create_group != "" ? concat(alicloud_dns_group.this.*.id, [""])[0] : concat(data.alicloud_dns_groups.this.*.groups.0.group_id, [""])[0]
 
   existing_domain = var.existing_domain_name != "" || var.create ? true : false
   this_dns_name   = var.existing_domain_name != "" ? var.existing_domain_name : concat(alicloud_dns.this.*.name, [""])[0]
