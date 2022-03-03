@@ -18,4 +18,3 @@ output "this_group_name" {
   description = "Name of the group in which the domain will add"
   value       = concat(alicloud_dns_group.this.*.name, [""])[0]
 }
-

@@ -97,4 +97,3 @@ variable "record_list" {
   }))
   default = []
 }
-
