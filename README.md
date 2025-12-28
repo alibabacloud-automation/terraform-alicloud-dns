@@ -82,7 +82,7 @@ Add records to existing domain.
 ```hcl
 module "dns" {
   source               = "terraform-alicloud-modules/dns/alicloud"
-  existing_domian_name = "dns002.abc"
+  existing_domain_name = "dns002.abc"
   records = [
     {
       rr       = "www"
