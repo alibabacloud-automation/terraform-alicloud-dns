@@ -1,3 +1,14 @@
+## [2.0.0](https://github.com/alibabacloud-automation/terraform-alicloud-dns/compare/v1.5.1...v2.0.0) (2026-04-22)
+
+
+### ⚠ BREAKING CHANGES
+
+* add provider version constraint for aliyun/alicloud
+
+### Features
+
+* add provider version constraint for aliyun/alicloud ([262af78](https://github.com/alibabacloud-automation/terraform-alicloud-dns/commit/262af78d08ce6bdbc46793bb6767ba9b8461b1c2))
+
 ## [1.5.1](https://github.com/alibabacloud-automation/terraform-alicloud-dns/compare/v1.5.0...v1.5.1) (2025-11-27)
 
 ## 1.6.0 (Unreleased)
