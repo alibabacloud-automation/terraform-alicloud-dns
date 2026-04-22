@@ -1,7 +1,7 @@
 data "alicloud_resource_manager_resource_groups" "default" {
 }
 
-//create a new group
+#create a new group
 module "group" {
   source = "../.."
 
@@ -17,7 +17,7 @@ module "group" {
 
 }
 
-//create a new dns
+#create a new dns
 module "dns" {
   source = "../.."
 
@@ -28,13 +28,13 @@ module "dns" {
   #dns
   create            = true
   domain_name       = "dns168.abc"
-  resource_group_id = data.alicloud_resource_manager_resource_groups.default.ids.0
+  resource_group_id = data.alicloud_resource_manager_resource_groups.default.ids[0]
 
   #dns_records
   add_records = false
 }
 
-//add records
+#add records
 module "records" {
   source = "../.."
 

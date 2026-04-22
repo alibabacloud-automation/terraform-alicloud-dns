@@ -8,12 +8,11 @@ locals {
   create_group = var.existing_group_name != "" ? false : var.create_group
   group_name   = var.group_name != "" ? var.group_name : substr("terraform-dns-group-${replace(random_uuid.this.result, "-", "")}", 0, 32)
 
-  create      = var.existing_domain_name != "" ? false : var.create
-  domain_name = var.existing_domain_name != "" ? var.existing_domain_name : var.domain_name
-  group_id    = local.create_group != "" ? concat(alicloud_dns_group.this.*.id, [""])[0] : concat(data.alicloud_dns_groups.this.*.groups.0.group_id, [""])[0]
+  create   = var.existing_domain_name != "" ? false : var.create
+  group_id = local.create_group != "" ? concat(alicloud_dns_group.this[*].id, [""])[0] : concat(data.alicloud_dns_groups.this[*].groups[0].group_id, [""])[0]
 
   existing_domain = var.existing_domain_name != "" || var.create ? true : false
-  this_dns_name   = var.existing_domain_name != "" ? var.existing_domain_name : concat(alicloud_dns.this.*.name, [""])[0]
+  this_dns_name   = var.existing_domain_name != "" ? var.existing_domain_name : concat(alicloud_dns.this[*].name, [""])[0]
   records         = length(var.records) > 0 ? var.records : var.record_list
 }
 
@@ -42,10 +41,10 @@ resource "alicloud_dns_record" "this" {
   count = local.existing_domain && var.add_records ? length(local.records) : 0
 
   name        = local.this_dns_name
-  host_record = lookup(local.records[count.index], "rr", "") != "" ? lookup(local.records[count.index], "rr") : lookup(local.records[count.index], "name")
+  host_record = lookup(local.records[count.index], "rr", "") != "" ? local.records[count.index]["rr"] : local.records[count.index]["name"]
   type        = lookup(local.records[count.index], "type", "A")
   ttl         = lookup(local.records[count.index], "ttl", 600)
-  value       = lookup(local.records[count.index], "value")
-  priority    = lookup(local.records[count.index], "priority")
+  value       = local.records[count.index]["value"]
+  priority    = local.records[count.index]["priority"]
   routing     = lookup(local.records[count.index], "line", "default")
 }
